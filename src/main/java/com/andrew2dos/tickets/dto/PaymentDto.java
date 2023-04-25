@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class PaymentDto {
 
-    private Long bookingId;
+    private Long reserveId;
+    private boolean paid;
+
 }

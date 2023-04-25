@@ -23,17 +23,14 @@ public class Booking {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @Column(name = "is_paid")
-    private boolean paid;
-
     public Booking() {
 
     }
+
     public Booking(Event event, String customerName, LocalDateTime date) {
         this.event = event;
         this.customerName = customerName;
         this.bookingTime = date;
     }
-
 
 }

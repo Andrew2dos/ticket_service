@@ -28,7 +28,4 @@ public class Event {
     @Column(name = "quantity")
     private Integer quantity;
 
-//    @Column(name = "reserve_quantity")
-//    private Integer reserveQuantity;
-
 }

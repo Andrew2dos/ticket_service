@@ -1,6 +1,5 @@
 package com.andrew2dos.tickets.controller;
 
-import com.andrew2dos.tickets.dto.PaymentDto;
 import com.andrew2dos.tickets.entity.Booking;
 import com.andrew2dos.tickets.service.TicketService;
 import lombok.Data;
@@ -27,15 +26,6 @@ public class BookingController {
         return new ResponseEntity<>(allBookings, HttpStatus.OK);
     }
 
-    @PostMapping("/bookings")
-    public ResponseEntity<Booking> bookTicket(@RequestBody Booking booking){
-        Booking createdBooking = service.bookTicket(booking.getEvent().getEventName(), booking.getCustomerName());
-        if (createdBooking == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
-    }
-
     @GetMapping("/bookings/{id}")
     public ResponseEntity<Booking> getBooking(@PathVariable Long id) {
         Booking booking = service.getBooking(id);
@@ -45,13 +35,4 @@ public class BookingController {
         return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
-    @PostMapping("/paid")
-    public ResponseEntity<String> paidBooking(@RequestBody PaymentDto payment) {
-        try {
-            service.fulfillPayment(payment.getBookingId());
-            return ResponseEntity.ok("Successful. The order " + payment.getBookingId() + " paid");
-        } catch (IllegalStateException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-        }
-    }
 }
